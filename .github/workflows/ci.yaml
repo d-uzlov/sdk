@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - "release/**"
+  workflow_dispatch:
+
 jobs:
   yamllint:
     uses: networkservicemesh/.github/.github/workflows/yamllint.yaml@main
