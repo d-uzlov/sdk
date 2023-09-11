@@ -118,6 +118,7 @@ func (n *vl3DNSServer) Request(ctx context.Context, request *networkservice.Netw
 		var previousNames = v.([]string)
 		if !compareStringSlices(previousNames, recordNames) {
 			for _, prevName := range previousNames {
+				fmt.Println("reiogna: dns delete prevName", prevName)
 				n.dnsServerRecords.Delete(prevName)
 			}
 		}
@@ -133,6 +134,7 @@ func (n *vl3DNSServer) Request(ctx context.Context, request *networkservice.Netw
 		ips := getSrcIPs(resp)
 		if len(ips) > 0 {
 			for _, recordName := range recordNames {
+				fmt.Println("reiogna: dns request store", recordName, ips)
 				n.dnsServerRecords.Store(recordName, ips)
 			}
 
@@ -163,6 +165,7 @@ func (n *vl3DNSServer) Close(ctx context.Context, conn *networkservice.Connectio
 	if v, ok := metadata.Map(ctx, false).LoadAndDelete(clientDNSNameKey{}); ok {
 		var names = v.([]string)
 		for _, name := range names {
+			fmt.Println("reiogna: dns close delete", name)
 			n.dnsServerRecords.Delete(name)
 		}
 	}
