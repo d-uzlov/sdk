@@ -30,7 +30,7 @@ import (
 )
 
 const (
-	jumboFrameSize = 1400
+	jumboFrameSize = 1410
 )
 
 type vl3MtuServer struct {
