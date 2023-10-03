@@ -37,7 +37,6 @@ import (
 	"github.com/networkservicemesh/sdk/pkg/networkservice/common/connect"
 	"github.com/networkservicemesh/sdk/pkg/networkservice/common/discover"
 	"github.com/networkservicemesh/sdk/pkg/networkservice/common/interdomainbypass"
-	"github.com/networkservicemesh/sdk/pkg/networkservice/common/swapip"
 	"github.com/networkservicemesh/sdk/pkg/registry"
 	registryauthorize "github.com/networkservicemesh/sdk/pkg/registry/common/authorize"
 	"github.com/networkservicemesh/sdk/pkg/registry/common/begin"
@@ -252,7 +251,7 @@ func NewServer(ctx context.Context, regURL, proxyURL *url.URL, tokenGenerator to
 		endpoint.WithAdditionalFunctionality(
 			interdomainbypass.NewServer(&interdomainBypassNSEServer, opts.listenOn),
 			discover.NewServer(nsClient, nseClient),
-			swapip.NewServer(opts.openMapIPChannel(ctx)),
+			// swapip.NewServer(opts.openMapIPChannel(ctx)),
 			clusterinfo.NewServer(),
 			connect.NewServer(
 				client.NewClient(
@@ -261,9 +260,9 @@ func NewServer(ctx context.Context, regURL, proxyURL *url.URL, tokenGenerator to
 					client.WithDialOptions(opts.dialOptions...),
 					client.WithDialTimeout(opts.dialTimeout),
 					client.WithoutRefresh(),
-					client.WithAdditionalFunctionality(
-						swapip.NewClient(opts.openMapIPChannel(ctx)),
-					),
+					// client.WithAdditionalFunctionality(
+					// 	swapip.NewClient(opts.openMapIPChannel(ctx)),
+					// ),
 				),
 			),
 		),
