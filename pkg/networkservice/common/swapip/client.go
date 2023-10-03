@@ -75,12 +75,12 @@ func (i *swapIPClient) Request(ctx context.Context, request *networkservice.Netw
 		return nil, err
 	}
 
-	params := resp.GetMechanism().GetParameters()
-	if params != nil {
-		if isSourceSide {
-			params[common.SrcIP], params[common.SrcOriginalIP] = params[common.SrcOriginalIP], ""
-		}
-	}
+	// params := resp.GetMechanism().GetParameters()
+	// if params != nil {
+	// 	if isSourceSide {
+	// 		params[common.SrcIP], params[common.SrcOriginalIP] = params[common.SrcOriginalIP], ""
+	// 	}
+	// }
 
 	return resp, nil
 }
